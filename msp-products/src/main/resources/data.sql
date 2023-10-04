@@ -1,0 +1,2 @@
+INSERT INTO TB_PRODUCTS  (description, name, photo_url, price) VALUES ('Tripa assada com limão', 'Tripa assada', 'https://i.pinimg.com/736x/70/9d/b4/709db435c9c8afe19d0a1b94d3840f76.jpg', 20.5);
+INSERT INTO TB_PRODUCTS  (description, name, photo_url, price) VALUES ('Calabresa frita com cebola', 'Porção de caçabresa', 'https://www.receitasnestle.com.br/sites/default/files/srh_recipes/78dd742c3f29106731262d93ec2b2ae0.jpg', 15.0);

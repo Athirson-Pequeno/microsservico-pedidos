@@ -38,7 +38,12 @@ public class AuthConfig {
 
         return http.csrf(csrf -> csrf.ignoringRequestMatchers(toH2Console()).disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(mvc.pattern("/msp-auth/register/**"), mvc.pattern("/msp-auth/token"), mvc.pattern("/msp-auth/validate"), toH2Console()).permitAll()
+                        .requestMatchers(
+                                mvc.pattern("/msp-auth/register/**"),
+                                mvc.pattern("/msp-auth/token"),
+                                mvc.pattern("/msp-auth/validate"),
+                                mvc.pattern("/msp-products/**"),
+                                toH2Console()).permitAll()
                         .anyRequest().authenticated()).headers(httpSecurityHeadersConfigurer -> httpSecurityHeadersConfigurer.frameOptions(frameOptionsConfig -> frameOptionsConfig.sameOrigin()))
                 .build();
 

@@ -16,13 +16,15 @@ public class RouteValidator {
             "/msp-auth/token",
             "/eureka",
             "/h2-console/**",
-            "/msp-auth/register/user"
+            "/msp-auth/register/user",
+            "/msp-products"
 
     );
 
     public static final List<String> adminApiEndpoints = List.of(
 
-            "/msp-auth/register/admin"
+            "/msp-auth/register/admin",
+            "/msp-products/new"
 
     );
 
