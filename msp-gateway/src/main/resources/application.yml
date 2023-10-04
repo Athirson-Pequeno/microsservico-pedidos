@@ -1,0 +1,36 @@
+server:
+  port: 8765
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: msp-products
+          uri: lb://MSP-PRODUCTS
+          predicates:
+            - Path=/msp-products/**
+          filters:
+            - AuthenticationFilter
+
+        - id: msp-orders
+          uri: lb://MSP-ORDERS
+          predicates:
+            - Path=/msp-orders/**
+          filters:
+            - AuthenticationFilter
+
+        - id: msp-auth
+          uri: lb://MSP-AUTH
+          predicates:
+            - Path=/msp-auth/**
+          filters:
+            - AuthenticationFilter
+
+  application:
+    name: msp-gateway
+
+eureka:
+  client:
+    service-url:
+      defaultZone : http://localhost:8761/eureka/
+
