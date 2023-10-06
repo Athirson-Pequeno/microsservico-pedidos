@@ -37,7 +37,7 @@ public class AuthConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        return http.csrf(csrf -> csrf.ignoringRequestMatchers(toH2Console()).disable())
+        return http.cors(corsConfigurer -> corsConfigurer.disable()).csrf(csrf -> csrf.ignoringRequestMatchers(toH2Console()).disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 mvc.pattern("/msp-auth/register/**"),

@@ -29,6 +29,8 @@ public class RouteValidator {
     );
 
     public static final List<String> userApiEndpoints = List.of(
+
+            "/msp-orders"
     );
 
     public Predicate<ServerHttpRequest> isSecured =

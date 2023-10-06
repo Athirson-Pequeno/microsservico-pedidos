@@ -56,6 +56,7 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
 
                 }catch (Exception e){
 
+
                     throw new RuntimeException("Un authorized access to application");
 
                 }
