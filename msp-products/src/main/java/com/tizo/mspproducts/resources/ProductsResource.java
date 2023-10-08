@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping(value = "/msp-products")
@@ -23,12 +24,14 @@ public class ProductsResource {
 
         @GetMapping(value = "/id/{id}")
         public ResponseEntity<Product> findById(@PathVariable Long id){
-            Product product = repository.findById(id).get();
-            return ResponseEntity.ok(product);
+            try {
+                Product product = repository.findById(id).get();
+                return ResponseEntity.ok(product);
+            }catch (Exception e){
 
+                return ResponseEntity.notFound().build();
+            }
         }
-
-
         @GetMapping(value = "/search")
         public ResponseEntity<Product> findByName(@RequestParam String name){
             Product obj = repository.findByName(name);

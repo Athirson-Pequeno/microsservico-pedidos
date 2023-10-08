@@ -8,11 +8,10 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 @Table(name = "tb_product")
 public class Product implements Serializable {
 
@@ -28,3 +27,4 @@ public class Product implements Serializable {
     private String photoUrl;
 
 }
+

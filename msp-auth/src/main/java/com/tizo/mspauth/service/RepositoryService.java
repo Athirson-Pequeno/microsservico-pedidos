@@ -17,7 +17,6 @@ public class RepositoryService {
     public void addNewUser(User user){
 
         user.getRole().add(roleRepository.findById(1L).get());
-        System.out.println(user.getRole());
         authService.saveUser(user);
 
     }
@@ -25,7 +24,6 @@ public class RepositoryService {
     public void addNewAdmin(User user){
         user.getRole().add(roleRepository.findById(1L).get());
         user.getRole().add(roleRepository.findById(2L).get());
-        System.out.println(user.getRole());
         authService.saveUser(user);
     }
 }
