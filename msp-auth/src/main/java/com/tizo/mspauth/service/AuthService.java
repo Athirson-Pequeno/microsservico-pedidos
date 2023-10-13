@@ -26,9 +26,9 @@ public class AuthService {
         return "User save";
     }
 
-    public String generateToken(String username){
+    public String generateToken(String email){
 
-        User user = userRepository.findByName(username).get();
+        User user = userRepository.findByEmail(email).get();
 
         return jwtService.generateToken(user);
 

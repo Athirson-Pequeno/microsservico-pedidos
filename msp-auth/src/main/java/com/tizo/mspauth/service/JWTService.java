@@ -32,15 +32,15 @@ public class JWTService {
         user.getRole().stream().forEach(role -> rolesClaims.add(role.getRoleName()));
 
         claims.put("roles", rolesClaims);
-        return createToken(claims, user.getName());
+        return createToken(claims, user.getEmail());
     }
 
-    private String createToken(Map<String, Object> claims, String username) {
+    private String createToken(Map<String, Object> claims, String email) {
 
         try {
             return Jwts.builder()
                     .setClaims(claims)
-                    .setSubject(username)
+                    .setSubject(email)
                     .setIssuedAt(new Date(System.currentTimeMillis()))
                     .setExpiration(generaterExpirationDate())
                     .signWith(getSignKey(), SignatureAlgorithm.HS256).compact();

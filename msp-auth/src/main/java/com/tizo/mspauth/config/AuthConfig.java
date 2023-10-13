@@ -22,12 +22,8 @@ import static org.springframework.boot.autoconfigure.security.servlet.PathReques
 @EnableWebSecurity
 public class AuthConfig {
 
-    @Value("${PORT:0}")
-    private String port;
-
     @Autowired
     MvcRequestMatcher.Builder mvc;
-
 
     @Bean
     public UserDetailsService userDetailsService(){

@@ -52,11 +52,10 @@ public class AuthControler {
 
     @PostMapping("/token")
     public String getToken(@RequestBody AuthRequest authRequest){
-        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
-        User user = userRepository.findByName(authRequest.getUsername()).get();
+        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
 
         if (authenticate.isAuthenticated()) {
-            return authService.generateToken(authRequest.getUsername());
+            return authService.generateToken(authRequest.getEmail());
         } else {
             throw new RuntimeException("invalid access");
         }
