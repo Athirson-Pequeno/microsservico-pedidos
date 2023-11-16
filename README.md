@@ -1,9 +1,9 @@
-# Open Endpoints
+#Open Endpoints
 
-## Microserviço Auth
+##Microserviço Auth
 
 <br>
-### /msp-auth/token - <span class="POST">POST</span>
+###/msp-auth/token - <span class="POST">POST</span>
 
 <div class="divDetalhes">
 Retorna o token do usuário após enviar um JSON com os atributos: email e password.
@@ -28,7 +28,7 @@ Em caso de outro erro a API retorna o texto "Bad Request" - HttpStatus 400
 </div>
 
 <br>
-### /msp-auth/register/user - <span class="POST">POST</span>
+###/msp-auth/register/user - <span class="POST">POST</span>
 
 <div class="divDetalhes">
 Adiciona um novo usuário que recebe as credencial de User, o usuário deve ser passado no formato de JSON, com os atributos: name, password e email.
@@ -55,7 +55,7 @@ Em caso de outro erro a API retorna o texto "Error creating user" - HttpStatus 4
 </div>
 
 <br>
-### /msp-auth/validate - <span class="GET">GET</span>
+###/msp-auth/validate - <span class="GET">GET</span>
 
 <div class="divDetalhes">
 Verificar se o token JWT passado pelo Header é válido.
@@ -69,9 +69,9 @@ Em caso de outro erro a API retorna o texto "Error" - HttpStatus 400
 </div>
 
 <br>
-## Microserviço Products
+##Microserviço Products
 <br>
-### /msp-products - <span class="GET">GET</span>
+###/msp-products - <span class="GET">GET</span>
 
 <div class="divDetalhes">
 Retorna todos os produtos do bancos de dados.
@@ -80,9 +80,9 @@ Retorna todos os produtos do bancos de dados.
 #User EndPoints
 
 
-## Microserviço Orders
+##Microserviço Orders
 <br>
-### /msp-orders/new - <span class="POST">POST</span>
+###/msp-orders/new - <span class="POST">POST</span>
 
 <div class="divDetalhes">
 Adiciona um novo pedido, os produtos do pedido devem ser passados no formato de lista dentro do JSON, cada item da lista deve conter o id do produto que é encontrado no microserviço de produto e uma quantidade.
@@ -108,7 +108,7 @@ Em caso do produto não existir a API retorna o texto "Product not found, error 
 Em caso de outro erro a API retorna o texto "Error" - HttpStatus 500
 </div>
 <br>
-### /msp-orders/orders/update/{IDPedido} - <span class="POST">POST</span>
+###/msp-orders/orders/update/{IDPedido} - <span class="POST">POST</span>
 
 <div class="divDetalhes">
 Atualiza um pedido existente, os produtos do pedido devem ser passados no formato de lista dentro do JSON, cada item da lista deve conter o id do produto que é encontrado no microserviço de produto e um valor para a quantidade. Se o id de um dos produtos passados for igual a um já existe a quantidade dele será atualizada, se for um id que não existe no pedido original o produto será adicionado.
@@ -140,7 +140,7 @@ Em caso do produto não existir a API retorna o texto "Product not found, error 
 Em caso de outro erro a API retorna o texto "Error" - HttpStatus 500
 </div>
 <br>
-### /msp-orders/orders/clientorders - <span class="POST">POST</span>
+###/msp-orders/orders/clientorders - <span class="POST">POST</span>
 
 <div class="divDetalhes">
 Retorna todos os pedidos do cliente baseado no token de autorização JWT.
@@ -156,9 +156,9 @@ Em caso de erro a API retorna o texto "Error" - HttpStatus 500
 #Admin EndPoints
 
 <br>
-## Microserviço Auth
+##Microserviço Auth
 <br>
-### /msp-auth/register/admin - <span class="POST">POST</span>
+###/msp-auth/register/admin - <span class="POST">POST</span>
 
 <div class="divDetalhes">
 Adiciona um novo usuário que recebe as credencias de Admin e User, o usuário deve ser passado no formato de JSON, com os atributos: name, password e email.
@@ -187,9 +187,9 @@ Em caso de outro erro a API retorna o texto "Error creating admin" - HttpStatus 
 </div>
 
 <br>
-## Microserviço Products
+##Microserviço Products
 <br>
-### /msp-products/new - <span class="POST">POST</span>
+###/msp-products/new - <span class="POST">POST</span>
 
 <div class="divDetalhes">
 Adiciona um novo produto, o produto deve ser passado no formato de JSON, com os atributos, name, price, description e photoUrl.
@@ -219,9 +219,9 @@ Em caso de erro a API retorna o  texto "Error creating product" - HttpStatus 400
 </div>
 
 <br>
-## Microserviço Orders
+##Microserviço Orders
 <br>
-### /msp-orders/all - <span class="GET">GET</span>
+###/msp-orders/all - <span class="GET">GET</span>
 
 <div class="divDetalhes">
 Retorna todos os pedidos.
