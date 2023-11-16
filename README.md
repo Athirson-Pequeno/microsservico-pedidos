@@ -5,27 +5,22 @@
 <br>
 <code>/msp-auth/token - POST</code>
 
-<div class="divDetalhes">
 Retorna o token do usuário após enviar um JSON com os atributos: email e password.
 
-<p>
 Exemplo:
-<div class="divDetalhesCod">
+```
 {
-    <br>
     "email" : "exemplo@email.com"
-    <br>
+    
     "password" : "123456",
-    <br>
 }
-</div>
-<p>
+```
+
 Em caso de sucesso a API retorna o texto do token JWT - HttpStatus 200
-<p>
+
 Em caso do usuário não estiver cadastrado a API retorna o texto "Invalid access, bad credentials" - HttpStatus 401
-<p>
+
 Em caso de outro erro a API retorna o texto "Bad Request" - HttpStatus 400
-</div>
 
 <br>
 <code>/msp-auth/register/user - <span class="POST">POST</span></code>
