@@ -3,7 +3,7 @@
 ## Microserviço Auth
 
 <br>
-<code>/msp-auth/token - POST`</code>
+<code>/msp-auth/token - POST</code>
 
 <div class="divDetalhes">
 Retorna o token do usuário após enviar um JSON com os atributos: email e password.
@@ -28,7 +28,7 @@ Em caso de outro erro a API retorna o texto "Bad Request" - HttpStatus 400
 </div>
 
 <br>
-### /msp-auth/register/user - <span class="POST">POST</span>
+<code>/msp-auth/register/user - <span class="POST">POST</span></code>
 
 <div class="divDetalhes">
 Adiciona um novo usuário que recebe as credencial de User, o usuário deve ser passado no formato de JSON, com os atributos: name, password e email.
