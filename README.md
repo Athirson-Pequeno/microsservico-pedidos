@@ -1,8 +1,10 @@
-#Open Endpoints
+# Open Endpoints
 
-#### Microserviço Auth
+## Microserviço Auth
 
-* /msp-auth/token - <span class="POST">POST</span>
+<br>
+
+#### /msp-auth/token - <span class="POST">POST</span>
 
 <div class="divDetalhes">
 Retorna o token do usuário após enviar um JSON com os atributos: email e password.
@@ -26,7 +28,8 @@ Em caso do usuário não estiver cadastrado a API retorna o texto "Invalid acces
 Em caso de outro erro a API retorna o texto "Bad Request" - HttpStatus 400
 </div>
 
-* /msp-auth/register/user - <span class="POST">POST</span>
+<br>
+### /msp-auth/register/user - <span class="POST">POST</span>
 
 <div class="divDetalhes">
 Adiciona um novo usuário que recebe as credencial de User, o usuário deve ser passado no formato de JSON, com os atributos: name, password e email.
@@ -52,7 +55,9 @@ Em caso do usuário já estiver cadastrado a API retorna o texto "User already e
 Em caso de outro erro a API retorna o texto "Error creating user" - HttpStatus 400
 </div>
 
-* /msp-auth/validate - <span class="GET">GET</span>
+<br>
+
+### /msp-auth/validate - <span class="GET">GET</span>
 
 <div class="divDetalhes">
 Verificar se o token JWT passado pelo Header é válido.
@@ -64,6 +69,8 @@ Em caso do token ser inválido retorna "Invalid token" - HttpStatus 401
 <p>
 Em caso de outro erro a API retorna o texto "Error" - HttpStatus 400
 </div>
+
+<br>
 
 ### Microserviço Products
 
