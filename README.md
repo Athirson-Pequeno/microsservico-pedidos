@@ -33,7 +33,6 @@ Em caso de outro erro a API retorna o texto "Bad Request" - HttpStatus 400
 
 Adiciona um novo usuário que recebe as credencial de User, o usuário deve ser passado no formato de JSON, com os atributos: name, password e email.
 
-<p>
 Exemplo:
 ```
 {
@@ -46,11 +45,11 @@ Exemplo:
     <br>
 }
 ```
-<p>
+
 Em caso de sucesso a API retorna o texto "User created" - HttpStatus 200
-<p>
+
 Em caso do usuário já estiver cadastrado a API retorna o texto "User already exist" - HttpStatus 422
-<p>
+
 Em caso de outro erro a API retorna o texto "Error creating user" - HttpStatus 400
 
 
