@@ -5,6 +5,7 @@
 <br>
 <code>/msp-auth/token - POST</code>
 <p>
+	
 Retorna o token do usuário após enviar um JSON com os atributos: email e password.
 
 Exemplo:
@@ -21,6 +22,7 @@ Em caso de sucesso a API retorna o texto do token JWT - HttpStatus 200
 Em caso do usuário não estiver cadastrado a API retorna o texto "Invalid access, bad credentials" - HttpStatus 401
 
 Em caso de outro erro a API retorna o texto "Bad Request" - HttpStatus 400
+</p>
 
 <br>
 <code>/msp-auth/register/user - <span class="POST">POST</span></code>
@@ -46,7 +48,7 @@ Em caso de sucesso a API retorna o texto "User created" - HttpStatus 200
 Em caso do usuário já estiver cadastrado a API retorna o texto "User already exist" - HttpStatus 422
 
 Em caso de outro erro a API retorna o texto "Error creating user" - HttpStatus 400
-
+</p>
 
 <br>
 <code>/msp-auth/validate - <span class="GET">GET</span></code>
@@ -70,17 +72,21 @@ Em caso de outro erro a API retorna o texto "Error" - HttpStatus 400
 Retorna todos os produtos do bancos de dados.
 </p>
 
-#User EndPoints
+# User EndPoints
 
+<br>
 
-##Microserviço Orders
+## Microserviço Orders
+
 <br>
 <code>/msp-orders/new - <span class="POST">POST</span></code>
 
+<p>
+	
 Adiciona um novo pedido, os produtos do pedido devem ser passados no formato de lista dentro do JSON, cada item da lista deve conter o id do produto que é encontrado no microserviço de produto e uma quantidade.
 
 Para ter acesso deve-se passar um Bearer Token com credencias de User pelo cabeçalho da requisição.
-
+</p>
 
 Exemplo:
 ```
