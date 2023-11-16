@@ -3,8 +3,7 @@
 ## Microserviço Auth
 
 <br>
-
-#### /msp-auth/token - <span class="POST">POST</span>
+### /msp-auth/token - <span class="POST">POST</span>
 
 <div class="divDetalhes">
 Retorna o token do usuário após enviar um JSON com os atributos: email e password.
@@ -56,7 +55,6 @@ Em caso de outro erro a API retorna o texto "Error creating user" - HttpStatus 4
 </div>
 
 <br>
-
 ### /msp-auth/validate - <span class="GET">GET</span>
 
 <div class="divDetalhes">
@@ -71,10 +69,9 @@ Em caso de outro erro a API retorna o texto "Error" - HttpStatus 400
 </div>
 
 <br>
-
-### Microserviço Products
-
-* /msp-products - <span class="GET">GET</span>
+## Microserviço Products
+<br>
+### /msp-products - <span class="GET">GET</span>
 
 <div class="divDetalhes">
 Retorna todos os produtos do bancos de dados.
@@ -83,9 +80,9 @@ Retorna todos os produtos do bancos de dados.
 #User EndPoints
 
 
-#### Microserviço Orders
-
-* /msp-orders/new - <span class="POST">POST</span>
+## Microserviço Orders
+<br>
+### /msp-orders/new - <span class="POST">POST</span>
 
 <div class="divDetalhes">
 Adiciona um novo pedido, os produtos do pedido devem ser passados no formato de lista dentro do JSON, cada item da lista deve conter o id do produto que é encontrado no microserviço de produto e uma quantidade.
@@ -110,8 +107,8 @@ Em caso do produto não existir a API retorna o texto "Product not found, error 
 <p>
 Em caso de outro erro a API retorna o texto "Error" - HttpStatus 500
 </div>
-
-* /msp-orders/orders/update/{IDPedido} - <span class="POST">POST</span>
+<br>
+### /msp-orders/orders/update/{IDPedido} - <span class="POST">POST</span>
 
 <div class="divDetalhes">
 Atualiza um pedido existente, os produtos do pedido devem ser passados no formato de lista dentro do JSON, cada item da lista deve conter o id do produto que é encontrado no microserviço de produto e um valor para a quantidade. Se o id de um dos produtos passados for igual a um já existe a quantidade dele será atualizada, se for um id que não existe no pedido original o produto será adicionado.
@@ -142,8 +139,8 @@ Em caso do produto não existir a API retorna o texto "Product not found, error 
 <p>
 Em caso de outro erro a API retorna o texto "Error" - HttpStatus 500
 </div>
-
-* /msp-orders/orders/clientorders - **<span class="POST">POST</span>
+<br>
+### /msp-orders/orders/clientorders - <span class="POST">POST</span>
 
 <div class="divDetalhes">
 Retorna todos os pedidos do cliente baseado no token de autorização JWT.
@@ -158,10 +155,10 @@ Em caso de erro a API retorna o texto "Error" - HttpStatus 500
 
 #Admin EndPoints
 
-
-### Microserviço Auth
-
-* /msp-auth/register/admin - <span class="POST">POST</span>
+<br>
+## Microserviço Auth
+<br>
+### /msp-auth/register/admin - <span class="POST">POST</span>
 
 <div class="divDetalhes">
 Adiciona um novo usuário que recebe as credencias de Admin e User, o usuário deve ser passado no formato de JSON, com os atributos: name, password e email.
@@ -189,10 +186,10 @@ Em caso do usuário já estiver cadastrado a API retorna o texto "Admin already 
 Em caso de outro erro a API retorna o texto "Error creating admin" - HttpStatus 400
 </div>
 
-
-### Microserviço Products
-
-* /msp-products/new - <span class="POST">POST</span>
+<br>
+## Microserviço Products
+<br>
+### /msp-products/new - <span class="POST">POST</span>
 
 <div class="divDetalhes">
 Adiciona um novo produto, o produto deve ser passado no formato de JSON, com os atributos, name, price, description e photoUrl.
@@ -221,10 +218,10 @@ Em caso de sucesso a API retorna o texto "Product created" - HttpStatus 200
 Em caso de erro a API retorna o  texto "Error creating product" - HttpStatus 400
 </div>
 
-
-### Microserviço Orders
-
-* /msp-orders/all - <span class="GET">GET</span>
+<br>
+## Microserviço Orders
+<br>
+### /msp-orders/all - <span class="GET">GET</span>
 
 <div class="divDetalhes">
 Retorna todos os pedidos.
