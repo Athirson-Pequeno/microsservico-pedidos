@@ -3,7 +3,7 @@
 ## Microserviço Auth
 
 <br>
-###/msp-auth/token - <span class="POST">POST</span>
+### /msp-auth/token - <span class="POST">POST</span>
 
 <div class="divDetalhes">
 Retorna o token do usuário após enviar um JSON com os atributos: email e password.
@@ -28,7 +28,7 @@ Em caso de outro erro a API retorna o texto "Bad Request" - HttpStatus 400
 </div>
 
 <br>
-###/msp-auth/register/user - <span class="POST">POST</span>
+### /msp-auth/register/user - <span class="POST">POST</span>
 
 <div class="divDetalhes">
 Adiciona um novo usuário que recebe as credencial de User, o usuário deve ser passado no formato de JSON, com os atributos: name, password e email.
@@ -55,7 +55,7 @@ Em caso de outro erro a API retorna o texto "Error creating user" - HttpStatus 4
 </div>
 
 <br>
-###/msp-auth/validate - <span class="GET">GET</span>
+### /msp-auth/validate - <span class="GET">GET</span>
 
 <div class="divDetalhes">
 Verificar se o token JWT passado pelo Header é válido.
