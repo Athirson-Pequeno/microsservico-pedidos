@@ -35,7 +35,8 @@ Adiciona um novo usuário que recebe as credencial de User, o usuário deve ser 
 
 <p>
 Exemplo:
-<div class="divDetalhesCod">
+<div>
+	```
 {
 	<br>
     "name" : "Exemplo",
@@ -45,6 +46,7 @@ Exemplo:
     "email" : "exemplo@email.com"
     <br>
 }
+	```
 </div>
 <p>
 Em caso de sucesso a API retorna o texto "User created" - HttpStatus 200
