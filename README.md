@@ -3,7 +3,7 @@
 ## Microserviço Auth
 
 <br>
-`/msp-auth/token - POST`
+<code>/msp-auth/token - POST`</code>
 
 <div class="divDetalhes">
 Retorna o token do usuário após enviar um JSON com os atributos: email e password.
