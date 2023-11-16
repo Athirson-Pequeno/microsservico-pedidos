@@ -1,25 +1,17 @@
 package com.tizo.msporders.resources;
 
 import com.tizo.msporders.entity.Order;
-import com.tizo.msporders.entity.Product;
 import com.tizo.msporders.entity.RequestRecord;
-import com.tizo.msporders.entity.StatusOrder;
 import com.tizo.msporders.repository.OrdersRepository;
-import com.tizo.msporders.repository.ProductRepository;
 import com.tizo.msporders.service.OrderService;
 import com.tizo.msporders.util.JwtUtil;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.UUID;
 
 @RestController
