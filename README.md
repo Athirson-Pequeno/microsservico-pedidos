@@ -30,7 +30,7 @@ Em caso de outro erro a API retorna o texto "Bad Request" - HttpStatus 400
 <br>
 <code>/msp-auth/register/user - <span class="POST">POST</span></code>
 
-<div class="divDetalhes">
+
 Adiciona um novo usuário que recebe as credencial de User, o usuário deve ser passado no formato de JSON, com os atributos: name, password e email.
 
 <p>
@@ -52,7 +52,7 @@ Em caso de sucesso a API retorna o texto "User created" - HttpStatus 200
 Em caso do usuário já estiver cadastrado a API retorna o texto "User already exist" - HttpStatus 422
 <p>
 Em caso de outro erro a API retorna o texto "Error creating user" - HttpStatus 400
-</div>
+
 
 <br>
 ### /msp-auth/validate - <span class="GET">GET</span>
