@@ -8,6 +8,7 @@ import com.tizo.msporders.repository.OrdersRepository;
 import com.tizo.msporders.repository.ProductRepository;
 import com.tizo.msporders.service.OrderService;
 import com.tizo.msporders.util.JwtUtil;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -41,34 +42,36 @@ public class OrdersResource {
     }
 
     @PostMapping(value = "/new")
-    public ResponseEntity<String> newOrder(@RequestBody List<RequestRecord> requestRecord, @RequestHeader String authorization) {
+    public ResponseEntity<?> newOrder(@RequestBody List<RequestRecord> requestRecord, @RequestHeader String authorization) {
 
         String clientEmail = jwtUtil.getSubject(authorization);
 
         try {
-            orderService.saveOrder(requestRecord, clientEmail);
+            orderService.saveOrder(requestRecord, clientEmail );
+            return ResponseEntity.ok("Oder saved");
 
         } catch (HttpClientErrorException.NotFound e){
 
             System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto não encontrado, erro ao salvar pedido");
+            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found, error saving order");
 
         } catch (Exception e){
 
-            System.out.println(e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error");
 
         }
-
-        return ResponseEntity.ok("Pedido realizado");
     }
 
     @PostMapping(value = "/orders/clientorders")
-    public ResponseEntity<List<Order>> findByClientID(@RequestHeader String authorization){
+    public ResponseEntity<?> findByClientID(@RequestHeader String authorization){
         String clientEmail = jwtUtil.getSubject(authorization);
-        List<Order> list = ordersRepository.findByClientEmail(clientEmail);
 
-        return ResponseEntity.ok(list);
+        try {
+            List<Order> list = ordersRepository.findByClientEmail(clientEmail);
+            return ResponseEntity.ok(list);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error");
+        }
     }
 
     @PostMapping(value = "/orders/update/{idUUID}")
@@ -76,8 +79,19 @@ public class OrdersResource {
 
         String clientEmail = jwtUtil.getSubject(authorization);
 
-        orderService.updateOrder(requestRecord,  idUUID , clientEmail);
+        try {
 
-        return ResponseEntity.ok("Pedido atualizado");
+            orderService.updateOrder(requestRecord,  idUUID , clientEmail);
+            return ResponseEntity.ok("Updated order id = " + idUUID );
+
+        }catch (HttpClientErrorException.NotFound e){
+
+            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found, error saving order");
+
+        }catch (Exception e){
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error");
+
+        }
     }
 }

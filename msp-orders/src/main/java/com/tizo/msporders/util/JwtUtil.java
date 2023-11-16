@@ -25,6 +25,7 @@ public class JwtUtil {
         String newToken = token.replace("Bearer ", "");
         validateToken(newToken);
         return Jwts.parserBuilder().setSigningKey(getSignKey()).build().parseClaimsJws(newToken).getBody().getSubject();
+
     }
 
     private Key getSignKey() {

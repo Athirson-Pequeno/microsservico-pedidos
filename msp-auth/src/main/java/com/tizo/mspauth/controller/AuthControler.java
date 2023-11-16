@@ -4,8 +4,13 @@ import com.tizo.mspauth.dto.AuthRequest;
 import com.tizo.mspauth.entity.User;
 import com.tizo.mspauth.repository.UserRepository;
 import com.tizo.mspauth.service.AuthService;
+import com.tizo.mspauth.service.JWTService;
 import com.tizo.mspauth.service.RepositoryService;
+import io.jsonwebtoken.MalformedJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -18,54 +23,70 @@ public class AuthControler {
     private AuthService authService;
 
     @Autowired
-    UserRepository userRepository;
+    RepositoryService repositoryService;
 
     @Autowired
-    RepositoryService repositoryService;
+    JWTService jwtService;
 
     @Autowired
     private AuthenticationManager authenticationManager;
 
     @PostMapping("/register/user")
-    public String addNewUser(@RequestBody User user){
+    public ResponseEntity<String> addNewUser(@RequestBody User user){
 
         try {
             repositoryService.addNewUser(user);
-            return "User created";
+            return ResponseEntity.ok("User created");
+        }catch (DataIntegrityViolationException exception){
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body("User already exist" );
         }catch (Exception exception){
-            throw new RuntimeException("Error " + exception);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error creating user" );
         }
 
     }
     @PostMapping("/register/admin")
-    public String addNewAdmin(@RequestBody User user){
+    public ResponseEntity<String> addNewAdmin(@RequestBody User user){
 
         try {
             repositoryService.addNewAdmin(user);
-            return "Admin created";
+            return ResponseEntity.ok("Admin created");
+        }catch (DataIntegrityViolationException exception){
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body("Admin already exist" );
         }catch (Exception exception){
-            throw new RuntimeException("Error " + exception);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error creating admin" );
         }
 
     }
 
 
     @PostMapping("/token")
-    public String getToken(@RequestBody AuthRequest authRequest){
-        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
+    public ResponseEntity<String> getToken(@RequestBody AuthRequest authRequest){
 
-        if (authenticate.isAuthenticated()) {
-            return authService.generateToken(authRequest.getEmail());
-        } else {
-            throw new RuntimeException("invalid access");
+        try {
+            Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
+            if (authenticate.isAuthenticated()) {
+                return ResponseEntity.ok(authService.generateToken(authRequest.getEmail()));
+            }
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Bad Request");
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid access, bad credentials");
         }
+
     }
 
 
     @GetMapping("/validate")
-    public String getToken(@RequestParam("token") String token){
-        authService.validateToken(token);
+    public ResponseEntity<String> getToken(@RequestHeader String authorization){
 
-        return "token is valid";
+        try {
+            String newToken = authorization.replace("Bearer ", "");
+            authService.validateToken(newToken);
+            return ResponseEntity.ok("Token is valid, credentials: " + jwtService.getRoles(newToken));
+
+        }catch (MalformedJwtException e){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token");
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error");
+        }
     }
 }

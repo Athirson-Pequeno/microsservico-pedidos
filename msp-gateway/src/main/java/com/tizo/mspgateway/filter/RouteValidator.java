@@ -9,28 +9,31 @@ import java.util.function.Predicate;
 @Component
 public class RouteValidator {
 
-
-
     public static final List<String> openApiEndpoints = List.of(
 
             "/msp-auth/token",
             "/eureka",
             "/h2-console/**",
             "/msp-auth/register/user",
-            "/msp-products"
+            "/msp-products",
+            "/msp-auth/validate"
 
     );
 
     public static final List<String> adminApiEndpoints = List.of(
 
             "/msp-auth/register/admin",
-            "/msp-products/new"
+            "/msp-products/new",
+            "/msp-orders/all"
 
     );
 
     public static final List<String> userApiEndpoints = List.of(
 
-            "/msp-orders"
+            "/msp-orders/new",
+            "/msp-orders/orders/update/",
+            "/msp-orders/orders/clientorders"
+
     );
 
     public Predicate<ServerHttpRequest> isSecured =
@@ -43,7 +46,7 @@ public class RouteValidator {
                     .stream()
                     .anyMatch(uri -> request.getURI().getPath().contains(uri));
     public Predicate<ServerHttpRequest> requiresUserAccess =
-            request -> adminApiEndpoints
+            request -> userApiEndpoints
                     .stream()
                     .anyMatch(uri -> request.getURI().getPath().contains(uri));
 

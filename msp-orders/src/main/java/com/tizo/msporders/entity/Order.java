@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.http.HttpStatusCode;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -22,7 +23,6 @@ public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-
     private String clientEmail;
     private LocalDateTime dateOrderPlaced;
     private String status;

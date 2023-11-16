@@ -1,6 +1,7 @@
 package com.tizo.mspgateway.filter;
 
 import com.tizo.mspgateway.util.JwtUtil;
+import jakarta.ws.rs.NotAuthorizedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Objects;
+
 @Component
 public class AuthenticationFilter extends AbstractGatewayFilterFactory<AuthenticationFilter.Config> {
 
@@ -36,10 +39,11 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                 //header contains token or not
                 if (!exchange.getRequest().getHeaders().containsKey(HttpHeaders.AUTHORIZATION)){
 
-                   throw new RuntimeException("Missing authorization header token");
+                    throw new NotAuthorizedException("Missing authorization header token");
+
 
                 }
-                String authHeader = exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION).get(0);
+                String authHeader = Objects.requireNonNull(exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION)).get(0);
 
                 if (authHeader !=null && authHeader.startsWith("Bearer ")){
                     authHeader = authHeader.substring(7);
@@ -50,15 +54,13 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
 
                     if(!listRoles.contains("ROLE_ADMIN") && validator.requiresAdminAccess.test(exchange.getRequest())){
 
-                        throw new RuntimeException("Requires administrator access");
+                        throw new NotAuthorizedException("Requires administrator access");
 
                     }
 
                 }catch (Exception e){
 
-
-                    throw new RuntimeException("Un authorized access to application");
-
+                    throw new NotAuthorizedException("unauthorized access");
                 }
 
             }

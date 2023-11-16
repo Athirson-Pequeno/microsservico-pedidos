@@ -32,9 +32,11 @@ public class OrderService {
 
     }
 
-    public void saveOrder(List<RequestRecord> requestRecord, String clientEmail){
+    public Order saveOrder(List<RequestRecord> requestRecord, String clientEmail){
 
         Order order = new Order();
+        UUID uuid = UUID.randomUUID();
+        order.setId(uuid);
 
         requestRecord.forEach(item ->{
 
@@ -44,6 +46,8 @@ public class OrderService {
             order.getItens().add(product);
 
         });
+
+
 
         BigDecimal totalPrice = order.getItens().stream()
                 .map(item -> item.getPrice().multiply(BigDecimal.valueOf(item.getAmount())))
@@ -55,6 +59,7 @@ public class OrderService {
 
         ordersRepository.saveAndFlush(order);
 
+        return ordersRepository.findById(uuid);
     }
 
     public void updateOrder(List<RequestRecord> requestRecord, UUID idUUID, String clientEmail){
@@ -63,7 +68,6 @@ public class OrderService {
         if (!order.getClientEmail().equals(clientEmail)){
             throw new RuntimeException();
         }
-
 
         requestRecord.forEach(requestRecordItem -> {
 
@@ -94,7 +98,7 @@ public class OrderService {
         order.setPrice(totalPrice);
         order.setDateOrderPlaced(LocalDateTime.now());
 
-        ordersRepository.save(order);
+        ordersRepository.saveAndFlush(order);
     }
 
 }

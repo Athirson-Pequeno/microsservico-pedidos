@@ -25,11 +25,16 @@ public class JWTService {
         Jwts.parserBuilder().setSigningKey(getSignKey()).build().parseClaimsJws(token);
     }
 
+    public List<String> getRoles(String token){
+        validateToken(token);
+        return (List<String>) Jwts.parserBuilder().setSigningKey(getSignKey()).build().parseClaimsJws(token).getBody().get("roles");
+    }
+
     public String generateToken(User user){
         Map<String, Object> claims = new HashMap<>();
 
         List<String> rolesClaims = new ArrayList<>();
-        user.getRole().stream().forEach(role -> rolesClaims.add(role.getRoleName()));
+        user.getRole().forEach(role -> rolesClaims.add(role.getRoleName()));
 
         claims.put("roles", rolesClaims);
         return createToken(claims, user.getEmail());
