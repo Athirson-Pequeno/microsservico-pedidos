@@ -4,7 +4,7 @@
 
 <br>
 <code>/msp-auth/token - POST</code>
-
+<p>
 Retorna o token do usuário após enviar um JSON com os atributos: email e password.
 
 Exemplo:
@@ -24,20 +24,19 @@ Em caso de outro erro a API retorna o texto "Bad Request" - HttpStatus 400
 
 <br>
 <code>/msp-auth/register/user - <span class="POST">POST</span></code>
-
-
+<p>
 Adiciona um novo usuário que recebe as credencial de User, o usuário deve ser passado no formato de JSON, com os atributos: name, password e email.
 
 Exemplo:
 ```
 {
-	<br>
+	
     "name" : "Exemplo",
-    <br>
+    
     "password" : "123456",
-    <br>
+    
     "email" : "exemplo@email.com"
-    <br>
+    
 }
 ```
 
