@@ -60,13 +60,13 @@ Em caso do token ser inválido retorna "Invalid token" - HttpStatus 401
 Em caso de outro erro a API retorna o texto "Error" - HttpStatus 400
 
 <br>
-##Microserviço Products
+## Microserviço Products
 <br>
-###/msp-products - <span class="GET">GET</span>
+<code>/msp-products - <span class="GET">GET</span></code>
 
-<div class="divDetalhes">
+<p>
 Retorna todos os produtos do bancos de dados.
-</div>
+</p>
 
 #User EndPoints
 
