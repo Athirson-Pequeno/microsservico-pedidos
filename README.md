@@ -1,19 +1,16 @@
 # Open Endpoints
 
 ## Microserviço Auth
-
-<br>
 <code>/msp-auth/token - POST</code>
 <p>
-	
+
 Retorna o token do usuário após enviar um JSON com os atributos: email e password.
 
 Exemplo:
 ```
 {
-    "email" : "exemplo@email.com"
-    
-    "password" : "123456",
+    "email" : "exemplo@email.com",
+    "password" : "123456"
 }
 ```
 
@@ -24,8 +21,8 @@ Em caso do usuário não estiver cadastrado a API retorna o texto "Invalid acces
 Em caso de outro erro a API retorna o texto "Bad Request" - HttpStatus 400
 </p>
 
-<br>
-<code>/msp-auth/register/user - <span class="POST">POST</span></code>
+<hr>
+<code>/msp-auth/register/user - POST</code>
 <p>
 	
 Adiciona um novo usuário que recebe as credencial de User, o usuário deve ser passado no formato de JSON, com os atributos: name, password e email.
@@ -33,13 +30,9 @@ Adiciona um novo usuário que recebe as credencial de User, o usuário deve ser 
 Exemplo:
 ```
 {
-	
     "name" : "Exemplo",
-    
     "password" : "123456",
-    
-    "email" : "exemplo@email.com"
-    
+    "email" : "exemplo@email.com"   
 }
 ```
 
@@ -49,9 +42,9 @@ Em caso do usuário já estiver cadastrado a API retorna o texto "User already e
 
 Em caso de outro erro a API retorna o texto "Error creating user" - HttpStatus 400
 </p>
-
-<br>
-<code>/msp-auth/validate - <span class="GET">GET</span></code>
+<hr>
+<code>/msp-auth/validate - GET</code>
+<p>
 
 Verificar se o token JWT passado pelo Header é válido.
 
@@ -60,26 +53,22 @@ Em caso de sucesso a API retorna o texto "Token is valid" - HttpStatus 200
 Em caso do token ser inválido retorna "Invalid token" - HttpStatus 401
 
 Em caso de outro erro a API retorna o texto "Error" - HttpStatus 400
-
-<br>
+</p>
+<hr>
 
 ## Microserviço Products
-
-<br>
-<code>/msp-products - <span class="GET">GET</span></code>
+<code>/msp-products - GET</code>
 <p> 
 	
 Retorna todos os produtos do bancos de dados.
 </p>
+<hr>
 
 # User EndPoints
 
-<br>
-
 ## Microserviço Orders
 
-<br>
-<code>/msp-orders/new - <span class="POST">POST</span></code>
+<code>/msp-orders/new - POST</code>
 
 <p>
 	
@@ -91,19 +80,17 @@ Para ter acesso deve-se passar um Bearer Token com credencias de User pelo cabe�
 Exemplo:
 ```
 [{
-	<br>
     "productID" : 2,
-	<br>
     "amount" : 1
-	<br>
 }]
 ```
 Em caso de sucesso a API retorna o texto "Oder saved" - HttpStatus 200
 
 Em caso do produto não existir a API retorna o texto "Product not found, error saving order" - HttpStatus 404
 Em caso de outro erro a API retorna o texto "Error" - HttpStatus 500
-<br>
-<code>msp-orders/orders/update/{IDPedido} - <span class="POST">POST</span></code>
+<hr>
+<code>msp-orders/orders/update/{IDPedido} - POST</code>
+<p>
 
 Atualiza um pedido existente, os produtos do pedido devem ser passados no formato de lista dentro do JSON, cada item da lista deve conter o id do produto que é encontrado no microserviço de produto e um valor para a quantidade. Se o id de um dos produtos passados for igual a um já existe a quantidade dele será atualizada, se for um id que não existe no pedido original o produto será adicionado.
 
@@ -112,17 +99,11 @@ Para ter acesso deve-se passar um Bearer Token com credencias de User pelo cabe�
 Exemplo:
 ```
 [{
-	<br>
     "productID" : 2,
-	<br>
     "amount" : 20
-	<br>
 },{
-	<br>
     "productID" : 1,
-	<br>
     "amount" : 10
-	<br>
 }]
 ```
 Em caso de sucesso a API retorna o texto "Updated order id = IDPedido" - HttpStatus 200
@@ -131,97 +112,80 @@ Em caso do produto não existir a API retorna o texto "Product not found, error 
 
 Em caso de outro erro a API retorna o texto "Error" - HttpStatus 500
 
-<br>
-###/msp-orders/orders/clientorders - <span class="POST">POST</span>
+<hr>
 
-<div class="divDetalhes">
-Retorna todos os pedidos do cliente baseado no token de autorização JWT.
+<code>/msp-orders/orders/clientorders - POST</code>
+
 <p>
+Retorna todos os pedidos do cliente baseado no token de autorização JWT.
+
 Para ter acesso deve-se passar um Bearer Token com credencias de User pelo cabeçalho da requisição.
 
-<p>
-	Em caso de sucesso a API retorna uma lista de pedidos - HttpStatus 200
-<p>
+Em caso de sucesso a API retorna uma lista de pedidos - HttpStatus 200
+
 Em caso de erro a API retorna o texto "Error" - HttpStatus 500
-</div>
+<hr>
 
-#Admin EndPoints
+# Admin EndPoints
 
-<br>
-##Microserviço Auth
-<br>
-###/msp-auth/register/admin - <span class="POST">POST</span>
 
-<div class="divDetalhes">
-Adiciona um novo usuário que recebe as credencias de Admin e User, o usuário deve ser passado no formato de JSON, com os atributos: name, password e email.
+## Microserviço Auth
+
+<code>/msp-auth/register/admin - POST</code>
 <p>
+Adiciona um novo usuário que recebe as credencias de Admin e User, o usuário deve ser passado no formato de JSON, com os atributos: name, password e email.
+
 Para ter acesso deve-se passar um Bearer Token com credencias de Admin pelo cabeçalho da requisição.
 
-<p>
 Exemplo:
-<div class="divDetalhesCod">
+```
 {
-	<br>
     "name" : "Exemplo",
-    <br>
     "password" : "123456",
-    <br>
     "email" : "exemplo@email.com"
-    <br>
 }
-</div>
-<p>
+```
+
 Em caso de sucesso a API retorna o texto "Admin created" - HttpStatus 200
-<p>
+
 Em caso do usuário já estiver cadastrado a API retorna o texto "Admin already exist" - HttpStatus 422
-<p>
+
 Em caso de outro erro a API retorna o texto "Error creating admin" - HttpStatus 400
-</div>
+</p>
 
-<br>
-##Microserviço Products
-<br>
-###/msp-products/new - <span class="POST">POST</span>
+<hr>
 
-<div class="divDetalhes">
+## Microserviço Products
+
+<code>/msp-products/new - POST</code>
+
 Adiciona um novo produto, o produto deve ser passado no formato de JSON, com os atributos, name, price, description e photoUrl.
 
-<p>
 Para ter acesso deve-se passar um Bearer Token com credencias de Admin pelo cabeçalho da requisição.
 
-<p>
 Exemplo:
-<div class="divDetalhesCod">
+```
 {
-	<br>
     "name": "Misto quente",
-	<br>
     "price": 2,
-	<br>
     "description": "Pão de forma com presunto e mussarela",
-	<br>
     "photoUrl": "https://img.cybercook.com.br/receitas/538/misto-quente-3-840x480.jpeg?q=75"
-	<br>
 }
-</div>
-<p>
+```
+
 Em caso de sucesso a API retorna o texto "Product created" - HttpStatus 200
-<p>
+
 Em caso de erro a API retorna o  texto "Error creating product" - HttpStatus 400
-</div>
+</p>
 
-<br>
-##Microserviço Orders
-<br>
-###/msp-orders/all - <span class="GET">GET</span>
+<hr>
 
-<div class="divDetalhes">
+## Microserviço Orders
+
+<code>/msp-orders/all - GET</code>
+
 Retorna todos os pedidos.
 
-<p>
 Para ter acesso deve-se passar um Bearer Token com credencias de Admin pelo cabeçalho da requisição.
-
-</div>
-
 
 
